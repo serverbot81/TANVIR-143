@@ -5,7 +5,7 @@
   "envGuide": "When useEnvForCredentials enabled, it will use the process.env key provided for email and password, which helps hide your credentials, you can find env in render's environment tab, you can also find it in replit secrets.",
   "DeveloperMode": true,
   "autoCreateDB": false,
-  "allowInbox": false,
+  "allowInbox": true,
   "autoClean": true,
   "adminOnly": false,
   "autoCensor": true,

@@ -11,7 +11,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies, ...rest })
     }
 
     const dateNow = Date.now();
-    const time = moment.tz("Asia/Manila").format("HH:MM:ss DD/MM/YYYY");
+    const time = moment.tz("Asia/Dhaka").format("HH:MM:ss DD/MM/YYYY");
     const { allowInbox, PREFIX, ADMINBOT, DeveloperMode, adminOnly } = global.config;
     const { userBanned, threadBanned, threadInfo, threadData, commandBanned } = global.data;
     const { commands, cooldowns } = global.client;
@@ -95,7 +95,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies, ...rest })
         if (checker.bestMatch.rating >= 0.5) {
           command = commands.get(checker.bestMatch.target);
         } else {
-          return     api.setMessageReaction("☹️", event.messageID, () => {}, true);
+          return     api.setMessageReaction("😾", event.messageID, () => {}, true);
         }
       }
     } 
@@ -244,7 +244,7 @@ module.exports = function ({ api, models, Users, Threads, Currencies, ...rest })
       dateNow < timestamps.get(senderID) + expirationTime
     ) {
       const cooldowns = ((timestamps.get(senderID) + expirationTime - dateNow) / 1000).toFixed(1);
-      return api.sendMessage(`The command "${command.config.name}" has been cooldown in ${cooldowns} seconds before you can use it again.`, event.threadID, event.messageID);
+      return api.sendMessage(`[🤍] "${command.config.name}" কমান্ড ${cooldowns} সেকেন্ড পর আবারো ব্যবহার করতে পারবেন।`, event.threadID, event.messageID);
     }
 
     var getText2;

@@ -1,41 +1,48 @@
-const axios = require('axios');
-const fs = require('fs-extra');
+const axios = require("axios");
 
+const baseApiUrl = async () => {
+  const base = await axios.get(
+    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`
+  );
+  return base.data.api;
+};
 module.exports.config = {
   name: "remini",
-  version: "1.0.0",
-  hasPermission: 0,
-  description: "Enhanced photo",
-  commandCategory: "Image",
-  usages: "[reply to an image]",
-  usePrefix: false,
-  credits: "Jonell Magallanes",
-  cooldowns: 2,
+  aliases: ["4k", "remini"],
+  category: "enhanced",
+  category: " remini",
+  prefix: true,
+  usePrefix: true,
+  commandCategory: "no",
+  permission: 0,
+  author: "Romim"
 };
-module.exports.run = async function ({ api, event, args }) {
-  const pathie = './modules/commands/cache/enhanced.jpg';
-  const { threadID, messageID } = event;
 
-  const james = event.messageReply.attachments[0].url || args.join(" ");
-
+module.exports.run = async ({ api, event, args }) => {
   try {
-    api.sendMessage("⏱️ | Your Photo is Enhancing. Please Wait....", threadID, messageID);
 
-    const response = await axios.get(`https://jonellccprojectapis10.adaptable.app/api/remini?imageUrl=${encodeURIComponent(james)}`);
-    const processedImageURL = response.data.image_data;
+    if (!event.messageReply || !event.messageReply.attachments || !event.messageReply.attachments[0]) {
+      return api.sendMessage("🤍] ছবির রিপ্লে তে লেখো.", event.threadID, event.messageID);
+    }
+api.sendMessage(" Enhancing Photo.", event.threadID, event.messageID);
 
-    const imgResponse = await axios.get(processedImageURL, { responseType: "stream" });
+    const Romim = event.messageReply?.attachments[0]?.url;
 
-    const writeStream = fs.createWriteStream(pathie);
-    imgResponse.data.pipe(writeStream);
 
-    writeStream.on('finish', () => {
-      api.sendMessage({
-        body: "🖼️ | Your Photo has been Enhanced!",
-        attachment: fs.createReadStream(pathie)
-      }, threadID, () => fs.unlinkSync(pathie), messageID);
+    const apiUrl = (`${await baseApiUrl()}/remini?input=${encodeURIComponent(Romim)}`);
+
+
+    const imageStream = await axios.get(apiUrl,{
+      responseType: 'stream'
     });
-  } catch (error) {
-    api.sendMessage(`❎ | Error processing image: ${error}`, threadID, messageID);
+
+
+    api.sendMessage({
+      body: "[🤍] 𝘗𝘩𝘰𝘵𝘰 𝘙𝘦𝘮𝘪𝘯𝘪 𝘚𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭",
+      attachment: imageStream.data
+    }, event.threadID, event.messageID);
+
+  } catch (e) {
+    api.sendMessage(`Error: ${e.message}`, event.threadID, event.messageID);
   }
 };

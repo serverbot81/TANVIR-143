@@ -2,30 +2,38 @@ const { exec } = require('child_process');
 
 module.exports.config = {
     name: "shell",
-    version: "1.0.0",
+    aliases: ["sh"],
+    version: "1.0",
+    credits: "Dipto",
     hasPermssion: 2,
     description: "Execute shell commands",
-    usePrefix: true,
-    credits: "Jonell Magallanes",
-    cooldowns: 3,
-    commandCategory: "Utility",
+    commandCategory: "system",
+    guide: "<command>",
+    coolDowns: 5,
+    usePrefix: true
 };
 
-module.exports.run = async function ({ api, event, args }) {
-    const { threadID, messageID } = event;
-    const command = args.join(" ");
+module.exports.run = async ({ message, args }) => {
 
-    if (!command) {
-        return api.sendMessage("Please provide a shell command to execute.", threadID, messageID);
+    //if (!admin.includes(event.from.id)) { 
+      //  return message.reply("You do not have permission to execute shell commands.");
+   // }
+
+    if (!args.length) {
+        return message.reply("Please provide a command to execute.");
     }
-        const teh = await api.sendMessage("Processing", threadID, messageID);
+    const command = args.join(' ');
+
     exec(command, (error, stdout, stderr) => {
         if (error) {
-            return api.editMessage(`Error: ${error.message}`, teh.messageID ,threadID, messageID);
+            return message.reply(`Error executing command: ${error.message}`);
         }
         if (stderr) {
-            return api.editMessage(`Stderr: ${stderr}`, teh.messageID, threadID, messageID);
+            return message.reply(`Shell Error: ${stderr}`);
         }
-        api.editMessage(`${stdout}`, teh.messageID, threadID, messageID);
+
+
+ const output = stdout || "Command executed successfully with no output.";
+        message.reply(`${output}`);
     });
 };

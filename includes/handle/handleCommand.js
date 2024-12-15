@@ -95,10 +95,10 @@ module.exports = function ({ api, models, Users, Threads, Currencies, ...rest })
         if (checker.bestMatch.rating >= 0.5) {
           command = commands.get(checker.bestMatch.target);
         } else {
-          return     api.setMessageReaction("❓", event.messageID, () => {}, true);
+          return     api.setMessageReaction("☹️", event.messageID, () => {}, true);
         }
       }
-    }
+    } 
 
     if (commandBanned.get(threadID) || commandBanned.get(senderID)) {
       if (!ADMINBOT.includes(senderID)) {

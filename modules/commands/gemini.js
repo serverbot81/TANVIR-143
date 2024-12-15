@@ -1,59 +1,59 @@
-const axios = require('axios');
+const axios = require("axios");
+const baseApiUrl = async () => {
+  const base = await axios.get(
+    `https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`,
+  );
+  return base.data.api;
+};
 
 module.exports.config = {
-    name: "gemini",
-    hasPermssion: 0,
-    version: "1.0.0",
-    credits: "Jonell Magallanes",
-    description: "EDUCATIONAL",
-    usePrefix: false,
-    commandCategory: "AI",
-    usages: "[question]",
-    cooldowns: 5,
+  name: "gemini",
+  version: "1.0",
+  hasPermssion: 0,
+  credits: "Dipto",
+  description: "gemeini ai",
+  usePrefix: true,
+  commandCategory: "google",
+  cooldowns: 5,
 };
 
-module.exports.handleReply = async function ({ api, event, handleReply }) {
-    const { messageID, threadID } = event;
-
-    try {
-        const lad = await api.sendMessage("🔎 Searching for an answer. Please wait...", threadID, messageID);
-        const response = await axios.get(`https://jonellccprojectapis10.adaptable.app/api/gen?ask=${encodeURIComponent(event.body)}`);
-
-        if (response.data.result) {
-            const responseMessage = `𝗚𝗲𝗺𝗶𝗻𝗶 𝗔𝗜\n━━━━━━━━━━━━━━━━━━\n${response.data.result}\n━━━━━━━━━━━━━━━━━━\n`;
-            api.editMessage(responseMessage, lad.messageID, threadID, messageID);
-        } else {
-            api.sendMessage("An error occurred while processing your request.", threadID, messageID);
-        }
-    } catch (error) {
-        console.error(error);
-        api.sendMessage("An error occurred while processing your request.", threadID, messageID);
+module.exports.run = async ({ api, args, event }) => {
+    const prompt = args.join(" ");
+    //---- Image Reply -----//
+    if (event.type === "message_reply") {
+      var t = event.messageReply.attachments[0].url;
+      try {
+        const response = await axios.get(
+          `${await baseApiUrl()}/gemini?prompt=${encodeURIComponent(prompt)}&url=${encodeURIComponent(t)}`,
+        );
+        const data2 = response.data.dipto;
+        api.sendMessage(data2, event.threadID, event.messageID);
+      } catch (error) {
+        console.error("Error:", error.message);
+        api.sendMessage(error, event.threadID, event.messageID);
+      }
     }
-};
-
-module.exports.run = async function ({ api, event, args }) {
-    const { messageID, threadID } = event;
-
-    if (!args[0]) return api.sendMessage("Please provide your question or request.\n\nExample: Gemini AI write a story about a young girl who discovers a magical portal in her backyard.", threadID, messageID);
-
-    try {
-        const lad = await api.sendMessage("🔎 Searching for an answer. Please wait...", threadID, messageID);
-        const response = await axios.get(`https://jonellccprojectapis10.adaptable.app/api/gen?ask=${encodeURIComponent(args.join(" "))}`);
-
-        if (response.data.result) {
-            const responseMessage = `𝗚𝗲𝗺𝗶𝗻𝗶 𝗔𝗜\n━━━━━━━━━━━━━━━━━━\n${response.data.result}\n━━━━━━━━━━━━━━━━━━\n`;
-            api.editMessage(responseMessage, lad.messageID, threadID, messageID);
-        } else {
-            api.sendMessage("An error occurred while processing your request.", threadID, messageID);
-        }
-
-        global.client.handleReply.push({
-            name: this.config.name,
-            messageID: lad.messageID,
-            author: event.senderID
-        });
-    } catch (error) {
-        console.error(error);
-        api.sendMessage("An error occurred while processing your request.", threadID, messageID);
+    //---------- Message Reply ---------//
+    else if (!prompt) {
+      return api.sendMessage(
+        "আমাকে প্রশ্ন করুন, আমি উত্তর দেওয়ার চেষ্টা করবো\n .gemini what is python.",
+        event.threadID,
+        event.messageID,
+      );
+    } else {
+      try {
+        const respons = await axios.get(
+          `${await baseApiUrl()}/gemini?prompt=${encodeURIComponent(prompt)}`,
+        );
+        const message = respons.data.dipto;
+        api.sendMessage(message, event.threadID, event.messageID);
+      } catch (error) {
+        console.error("Error calling Gemini AI:", error);
+        api.sendMessage(
+          `Sorry, there was an error processing your request.${error}`,
+          event.threadID,
+          event.messageID,
+        );
+      }
     }
-};
+  };

@@ -1,6 +1,7 @@
 module.exports.config = {
   name: "hbd",
   version: "1.0.0",
+  usePrefix: true,
   hasPermssion: 0,
   credits: "khá»‘n kiáº¿p tÃªn trá»™m",
   description: "prank friends",

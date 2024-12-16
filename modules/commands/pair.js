@@ -4,12 +4,11 @@ const fs = require("fs-extra");
 
 module.exports = {
 	config: {
-		name: "pairx",
-		cooldowns: 1,
+		name: "pair",
+		cooldowns: 10,
 		hasPermission: 0,
 		commandCategory: "fun",
-		usePrefix: true,
-		cooldown: 10
+		usePrefix: true
 	},
 	run: async function ({ api, event, args, usersData, threadsData }) {
 		let pathImg = __dirname + "/cache/background.png";
@@ -45,7 +44,7 @@ module.exports = {
 		var id2 = ungvien[Math.floor(Math.random() * ungvien.length)];
 		var name2 = "User2"; // Replace with function that retrieves the name of the user
 		var rd1 = Math.floor(Math.random() * 100) + 1;
-		var cc = ["0", "-1", "99,99", "-99", "-100", "101", "0,01"];
+		var cc = ["0", "1", "99,99", "minus 99", "unlimited", "101", "0,01"];
 		var rd2 = cc[Math.floor(Math.random() * cc.length)];
 		var djtme = [`${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd2}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`];
 
@@ -91,7 +90,7 @@ module.exports = {
 		fs.removeSync(pathAvt2);
 		return api.sendMessage(
 			{
-				body: `Congratulations ${name1} successfully paired with ${name2}\nThe odds are ${tile}%`,
+				body: `Two Couple, Love ${tile}%`,
 				mentions: [
 					{
 						tag: `${name2}`,

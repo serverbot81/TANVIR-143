@@ -31,16 +31,16 @@ module.exports.run = async function({ api, event, Users }) {
   var getHours = await global.client.getTime("hours");
   var session = `${getHours < 3 ? "midnight" : getHours < 8 ? "Early morning" : getHours < 12 ? "noon" : getHours < 17 ? "afternoon" : getHours < 23 ? "evening" : "midnight"}`
   const moment = require("moment-timezone");
-  var thu = moment.tz('Asia/Manila').format('dddd');
-  if (thu == 'Sunday') thu = 'Sunday'
-  if (thu == 'Monday') thu = 'Monday'
-  if (thu == 'Tuesday') thu = 'Tuesday'
-  if (thu == 'Wednesday') thu = 'Wednesday'
-  if (thu == "Thursday") thu = 'Thursday'
-  if (thu == 'Friday') thu = 'Friday'
-  if (thu == 'Saturday') thu = 'Saturday'
-  const time = moment.tz("Asia/Manila").format("HH:mm:ss - DD/MM/YYYY");
-  const hours = moment.tz("Asia/Manila").format("HH");
+  var thu = moment.tz('Asia/Dhaka').format('dddd');
+  if (thu == 'Sunday') thu = 'রবিবার'
+  if (thu == 'Monday') thu = 'সোমবার'
+  if (thu == 'Tuesday') thu = 'মঙ্গলবার'
+  if (thu == 'Wednesday') thu = 'বুধবার'
+  if (thu == "Thursday") thu = 'বৃহস্পতিবার'
+  if (thu == 'Friday') thu = 'শুক্রবার'
+  if (thu == 'Saturday') thu = 'শনিবার'
+  const time = moment.tz("Asia/Dhaka").format("HH:mm:ss - DD/MM/YYYY");
+  const hours = moment.tz("Asia/Dhaka").format("HH");
   const { commands } = global.client;
   const { threadID } = event;
   let threadInfo = await api.getThreadInfo(event.threadID);
@@ -146,7 +146,7 @@ axios.get(gifUrl, { responseType: 'arraybuffer' })
         abx.push(fs.createReadStream(__dirname + `/cache/join/${o}.png`))
       }
       memLength.sort((a, b) => a - b);
-      (typeof threadData.customJoin == "undefined") ? msg = `🌟 Welcome new member {name} to the group {threadName}\n→ URL Profile:\nhttps://www.facebook.com/profile.php?id={iduser}\n→ {type} are the group's {soThanhVien}${suffix} member\n→ Added to the group by: {author}\n→ Added by facebook link: https://www.facebook.com/profile.php?id={uidAuthor}\n─────────────────\n[ {time} - {thu} ]` : msg = threadData.customJoin;
+      (typeof threadData.customJoin == "undefined") ? msg = `🌟 হ্যালো {name} baby 🫢\n\n [🤍] তোমাকে আমাদের\n - {threadName} \n গ্রুপে স্বাগতম😘😌\n→\n→তুমি গ্রুপের ${soThanhVien}${suffix} সদস্য প্রিও🤭\n\n─────────────────\n[🤍] আজকের দিন: {thu} ` : msg = threadData.customJoin;
       var nameAuthor = await Users.getNameUser(event.author)
       msg = msg
         .replace(/\{iduser}/g, iduser.join(', '))

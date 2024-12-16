@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "wish",
+  name: "wish2",
   version: "0.0.6",
   hasPermssion: 0,
   usePrefix: true,

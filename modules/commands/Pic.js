@@ -10,8 +10,7 @@ module.exports.run = async function({ api, event, args }) {
     const fs = require("fs-extra");
     const request = require("request");
     const keySearch = args.join(" ");
-    if(keySearch) return api.sendMessage('usage: .pic cute cat', event.threadID, event.messageID)
-    const keySearchs = keySearch.substr(0, keySearch.indexOf('-'))
+    if(!keySearch) return api.sendMessage('usage: .pic cute cat', event.threadID, event.messageID)
     const res = await axios.get(`https://s4b1k-api-uj42.onrender.com/pinterest?search=${encodeURIComponent(keySearchs)}&count=12`);
     const data = res.data.data;
     var num = 0;

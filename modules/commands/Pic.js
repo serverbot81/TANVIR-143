@@ -27,9 +27,9 @@ const cookies = ["19TszJuB_FVAiyEx31vBsVumY0cDtVF4V1B4kU3ccJIv31KczDe5TsLOYa1j8B
 const randomCookie = cookies[Math.floor(Math.random() * cookies.length)];
       const wait = api.sendMessage("[🤍] 𝘐𝘮𝘢𝘨𝘦 𝘨𝘦𝘯𝘦𝘳𝘢𝘵𝘪𝘯𝘨,  𝘸𝘢𝘪𝘵...", event.threadID);
       const response = await axios.get(`https://s4b1k-api-uj42.onrender.com/pinterest?search=${prompt}&count=12`);
-const imageUrls = response.data.imageUrls || [];
+const imageUrls = response.data.data || [];
       if (!imageUrls.length) return api.sendMessage("err", event.threadID, event.messageID);
-      const images = await Promise.all(imageUrls.map(url => axios.get(url, { responseType: 'stream' }).then(res => res.data)));
+      const images = await Promise.all(imageUrls.map(url => axios.get(url, { responseType: 'stream' }).then(res => res.data.data)));
     api.unsendMessage(wait.messageID);
    api.sendMessage({ body: `[💙] Stay with TanvirBot`, attachment: images }, event.threadID, event.messageID);
     } catch (error) {

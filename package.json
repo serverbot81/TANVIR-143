@@ -106,6 +106,7 @@
     "websocket-stream": "^5.5.2",
     "ws3-fca": "^1.0.13",
     "youtube-search-api": "^1.2.1",
+    "nayan-videos-downloader": "^0.1.0",
     "youtube-to-mp3-poji": "^1.0.4",
     "yt-search": "^2.11.0",
     "ytdl-core": "^4.11.5"

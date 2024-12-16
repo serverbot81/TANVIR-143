@@ -5,7 +5,7 @@ const fs = require("fs-extra");
 module.exports = {
 	config: {
 		name: "pair",
-		cooldowns: 10,
+		cooldown: 10,
 		hasPermission: 0,
 		commandCategory: "fun",
 		usePrefix: true

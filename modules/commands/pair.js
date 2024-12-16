@@ -7,8 +7,9 @@ module.exports = {
 		name: "pairx",
 		cooldowns: 1,
 		hasPermission: 0,
-		comamndCategory: "fun",
+		commandCategory: "fun",
 		usePrefix: true,
+		cooldown: 10
 	},
 	run: async function ({ api, event, args, usersData, threadsData }) {
 		let pathImg = __dirname + "/cache/background.png";

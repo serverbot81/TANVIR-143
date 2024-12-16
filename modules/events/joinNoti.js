@@ -116,7 +116,7 @@ axios.get(gifUrl, { responseType: 'arraybuffer' })
         ctx.fillText(`${event.logMessageData.addedParticipants[o].fullName}`, canvas.width / 2 + 20, canvas.height / 2 + 100);
         ctx.save();
         ctx.font = `75px Semi`;
-        ctx.fillText(`Welcome to ${threadName}`, canvas.width / 2 - 15, canvas.height / 2 + 235)
+        ctx.fillText(`GROUP: ${threadName}`, canvas.width / 2 - 15, canvas.height / 2 + 235)
         const number = participantIDs.length - o;
 
         if (number === 11 || number === 12 || number === 13) {

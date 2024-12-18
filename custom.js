@@ -21,43 +21,52 @@ module.exports = async ({ api }) => {
     greetings: [
       {
         cronTime: '0 5 * * *',
-        messages: [`Good morning! Have a great day ahead!`],
+        messages: [`শুভ সকাল 🏜️🥰 @everyone`],
       },
       {
         cronTime: '0 8 * * *',
-        messages: [`Hello Everyone Time Check 8:00 AM :>`],
+        messages: [`_বুকে হাজারো কষ্ট নিয়ে \n
+                  আলহামদুলিল্লাহ বলাটা••!☺️ \n
+_আল্লাহর প্রতি অগাধ বিশ্বাসের নমুনা❤️🥀`],
       },
       {
         cronTime: '0 10 * * *',
-        messages: [`Hello everyone! How's your day going?`],
+        messages: [`「 - ইসলাম অহংকার করতে শেখায় না!🌸 \n \n
+
+- ইসলাম শুকরিয়া আদায় করতে শেখায়!🤲🕋🥀 」`],
       },
       {
         cronTime: '0 12 * * *',
-        messages: [`Lunchtime reminder: Take a break and eat well!`],
+        messages: [`দুপুরের খাবারের সময় হয়েছে👀, \n মোবাইল রেখে খাবার খেয়ে নাও😊🥀`],
       },
       {
         cronTime: '0 14 * * *',
-        messages: [`Reminder: Don't forget your tasks for today!`],
+        messages: [`_🌻••ছিঁড়ে ফেলুন অতীতের
+সকল পাপের
+               অধ্যায় ।
+_ফিরে আসুন রবের ভালোবাসায়••🖤🥀 `],
       },
       {
         cronTime: '0 18 * * *',
-        messages: [`Good evening! Relax and enjoy your evening.`],
+        messages: [`শুভ সন্ধ্যা 🌃🥰🙃🥀`],
       },
       {
         cronTime: '0 20 * * *',
-        messages: [`Time to wind down. Have a peaceful evening.`],
+        messages: [`নিশ্চয় নামাজ অশ্লীল ও গর্হিত
+        কার্য থেকে বিরত রাখে__🥀
+        _____(সূরা আনকাবুত ৪৫)`],
       },
       {
         cronTime: '0 22 * * *',
-        messages: [`Good night! Have a restful sleep.`],
+        messages: [`শুভ রাত্রি 🌙🥀`],
       },
       {
         cronTime: '0 7 * * *',
-        messages: async () => `Good morning! Have a great day ahead!\n\n${await fetchWeather()}`,
+        messages: async () => `শুভ সকাল 🌤️🥀\n\n${await fetchWeather()}`,
       },
       {
         cronTime: '0 19 * * *',
-        messages: async () => `Good evening! Relax and enjoy your evening.\n\n${await fetchWeather()}`,
+        messages: async () => `শুভ সন্ধ্যা 🌙🥀\n\n${await fetchWeather()}`,
       }
     ]
   };
@@ -78,7 +87,7 @@ module.exports = async ({ api }) => {
       });
     }, {
       scheduled: true,
-      timezone: "Asia/Manila"
+      timezone: "Asia/Dhaka"
     });
   });
 
@@ -101,4 +110,5 @@ module.exports = async ({ api }) => {
       });
     });
   }
+
 };
